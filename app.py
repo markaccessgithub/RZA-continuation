@@ -678,8 +678,8 @@ def test_change():
         else:
             con = sqlite3.connect("testing.db")#connects to database
             cur = con.cursor()
-            res = cur.execute(f"SELECT * FROM bought_tickets WHERE customer_id={user_id}")
-            return render_template("change_tickets.html", tickets = res)
+            res = cur.execute(f"SELECT * FROM reservations WHERE customer_id={user_id}")
+            return render_template("newtest.html", reservations = res)
 
     
 

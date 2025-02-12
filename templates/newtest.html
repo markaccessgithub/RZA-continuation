@@ -30,36 +30,6 @@
             }
             //this function calculates how many nights are between check in and check out and then also works out the price and then
             //updates the nights and price display to show the user
-            function nights() {
-                document.getElementById("error").style.display = "none";
-                x = document.getElementById("check_in").value;
-                y = document.getElementById("check_out").value;
-
-                console.log(y);
-                console.log(x);
-
-                var check_in = new Date(x);
-                var check_out = new Date(y);
-
-                console.log(check_in);
-                console.log(check_out);
-                if (x && y) {
-                    if (check_in < check_out) {
-                        let time_difference = check_out.getTime() - check_in.getTime();
-                        let days_difference = Math.round(time_difference / (1000 * 3600 * 24));
-                        var nights = days_difference;
-                        var room_price = getCookie('room_price')
-                        console.log(room_price);
-                        var number_price = Number(room_price);
-                        var total = number_price * nights;
-                        document.getElementById("nights").innerText = nights;
-                        document.getElementById("display").innerText = (`£${total}`);
-                        document.cookie = `total=${total}`;
-                    } else if (check_in >= check_out) {
-                        document.getElementById("error").style.display = "inline";
-                    }
-                }
-            }
             window.onload = function cookies() {
                 console.log(document.cookie);
                 const user_id = getCookie('user_id');
@@ -207,48 +177,20 @@
                     <h2 class = "title">Change Hotel</h2>
                     <div class="center">
 
-                        <div class="ticket_container">
+                        <div class="hotel_container">
                             {%for i in reservations%}
-                                {% if i[1] == 'Child'%}<div class="ticket" style="background: #9BC6D3;"> 
-                                {% elif i[1] == 'Adult'%}<div class= "ticket" style="background: #82A5C8;">{%endif%}
                                     <form action="change_tickets" method="POST">
-                                      <p>Type: {{i[1]}}</p>
-                                      <p>Date: {{i[2]}}</p>
-                                      <input type="hidden" value = {{i[0]}} id = "tic_id" name="tic_id">
-                                      <input type="hidden" value = {{i[2]}} id = "tic_date" name="tic_date">
-                                      <button id="submit" type = "submit" class="ui button">Manage Ticket</button>
+                                      <p>Room Number: {{i[5]}}</p>
+                                      <p>Check In: {{i[1]}}</p>
+                                      <p>Check Out: {{i[2]}}</p>
+                                      <input type="hidden" value = {{i[0]}} id = "reservation_id" name="reservation_id">
+                                      <input type="hidden" value = {{i[1]}} id = "check_in_date" name="check_in_date">
+                                      <input type="hidden" value = {{i[2]}} id = "check_out_date" name="check_out_date">
+                                      <button id="submit" type = "submit" class="ui button">Manage Reservation</button>
                                     </form>
                                 </div>
                             {%endfor%}
                         </div>
-
-                            <br>
-                            <p id="error" style="color:red; display:none">Please enter a check out date that is after the check in date.</p>
-                            
-                            {% if enter_fail%}
-                            <p style="color:red">Please fill in the boxes</p>
-                            {% endif %}
-
-                            {% if today_date%}
-                            <p style="color:red">Cannot book dates in the past</p>
-                            {% endif %}
-
-                            {% if invalid_fail%}
-                            <p style="color:red">Please enter a valid reservation that you paid for.</p>
-                            {% endif %}
-
-                            {% if date_fail %}
-                            <p style="color:red">Check out date is before check in</p>
-                            {% endif %}
-
-                            {% if empty_fail %}
-                            <p style="color:red">Please choose both a check in and check out date</p>
-                            {% endif %}
-
-                            {% if reserve_fail %}
-                            <p style="color:red">Hotel not available on those dates</p>
-                            {% endif %}
-
                         </div>
                     </div>
                 </div>
