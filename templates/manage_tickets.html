@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="content">
+  <h2 class = "title">Manage Ticket</h2>
+  <div class="center">
+      <div class = "bookInput">
+        <h1 id = "tic_date"></h1>
+          <form action="manage_tickets" method="post" id="new_ticket_form">
+             
+              <div>
+                  <p id="room_text"></p>
+                  <label for="new_date">New Ticket Date:</label>
+                  <div class="ui input">
+                      <input type="date" name="new_date" id="new_date">
+                  </div>                 
+              </div>
+          </form>
+          <br>
+          <div class="options">
+            <a id="back" href="/tic_back"><button class="ui button">Back</button></a>
+            <button id="checkout" type = "submit" form = "new_ticket_form" name ="new_ticket_form" class="ui button">Change Date</button>
+          </div>
+
+          <br>
+          <p id="error" style="color:red; display:none">Please enter a check out date that is after the check in date.</p>
+
+          {% if invalid_fail%}
+          <p style="color:red">Please choose a valid ticket that you paid for.</p>
+          {% endif %}
+
+          {% if date_fail %}
+          <p style="color:red">Chosen Date is Invalid</p>
+          {% endif %}
+
+      </div>
+  </div>
+</div>
+<script>
+  window.onload = function cookies() {
+            console.log(document.cookie);
+            const user_id = getCookie('user_id');
+            const name = getCookie('name');
+            const id = getCookie('tic_id');
+            const date = getCookie('tic_date');
+            console.log(user_id);
+            console.log(name);
+            console.log(id);
+            console.log(date);
+
+            if (user_id) {
+
+              document.querySelectorAll('.logout').forEach(function(el) {el.style.display = 'inline';});
+              document.querySelectorAll('.login').forEach(function(el) {el.style.display = 'none';});
+              document.querySelectorAll('.sign_up').forEach(function(el) {el.style.display = 'none';});
+              document.querySelectorAll('.delete').forEach(function(el) {el.style.display = 'inline';});
+              document.querySelectorAll('.change').forEach(function(el) {el.style.display = 'inline';});
+              document.querySelectorAll('.change_pass').forEach(function(el) {el.style.display = 'inline';});
+
+              document.getElementById('account').innerHTML = (`Account: ${name}`);
+              document.getElementById('tic_date').innerHTML = (`Current Ticket Date: ${date}`);
+
+            } else {
+              document.querySelectorAll('.change_pass').forEach(function(el) {el.style.display = 'none';});
+              document.querySelectorAll('.logout').forEach(function(el) {el.style.display = 'none';});
+              document.querySelectorAll('.login').forEach(function(el) {el.style.display = 'inline';});
+              document.querySelectorAll('.sign_up').forEach(function(el) {el.style.display = 'inline';});
+              document.querySelectorAll('.delete').forEach(function(el) {el.style.display = 'none';});
+              document.querySelectorAll('.change').forEach(function(el) {el.style.display = 'none';});
+            }
+          }
+</script>
+{%endblock%}
+
+
+
+
+

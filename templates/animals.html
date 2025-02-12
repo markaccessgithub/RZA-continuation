@@ -1,0 +1,247 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="content">
+    <h2>Animal Search</h2>
+
+    {% if search_fail %}
+    <p style="color:red">Could not find animal</p><!--Error message-->
+    <br>
+    {% endif%}
+
+    <div class = "search">
+        <form action="animals" class="animal_search"  method="post"style="padding: 10px; display:flex; column-gap: 20px; align-items: center;">
+            <div class="ui input"><!--Allows user to search for an animal however they have to get the name completely correct-->
+                <input class="animal_search" type="text" name="animal" placeholder="Search Animal">
+            </div>
+            <div>
+                <button type = "submit" class="ui button">Submit</button>
+            </div>
+        </form>
+        <script>
+            $(document).ready(function(){
+                $('.ui.dropdown').dropdown(); })
+        </script>
+        <div class="dropdown"><!--Filter Menu allows the user to only view each class of animal such as mammals-->
+            <div class="ui selection dropdown" style="z-index: 2;" onchange="animal_class()">
+                <input type="hidden" name="class" id="select_id">
+                <i class="dropdown icon"></i>
+                <div class="default text">Class</div>
+                <div class="menu">
+                <div class="item" data-value="All">All</div>
+                <div class="item" data-value="Mammal">Mammal</div>
+                <div class="item" data-value="Bird">Bird</div>
+                <div class="item" data-value="Amphibian">Amphibian</div>
+                <div class="item" data-value="Reptile">Reptile</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="animals">
+            <div class="Mammal"><!--Shows class so that it can be filtered out-->
+            <div class="Animal">
+                <div class="animal_name">
+                    <h3>Red Panda</h3>
+                </div>
+                <div class="animal_image">
+                    <img class="animal_image" src="/static/images/red_panda.jpg" >
+                </div>
+                <div class="description"> 
+                    <p>Red-furred mammal native to Eastern Asia</p>
+                </div>
+                <form action="/animals" method="post">
+                    <input type="hidden" value="Red Panda" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                    <button class="ui button" type="submit">Learn More</button>
+                </form>
+            </div>
+            </div>
+
+            <div class="Bird">
+            <div class="Animal">
+                <div class="animal_name">
+                    <h3>Eagle</h3>
+                </div>
+                <div class="animal_image">
+                    <img class="animal_image" src="/static/images/eagle.jpg" >
+                </div>
+                <div class="description"> 
+                    <p>Large bird of prey native to Eurasia</p>
+                </div>
+                <form action="/animals" method="post">
+                    <input type="hidden" value="Eagle" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                    <button class="ui button" type="submit">Learn More</button>
+                </form>
+            </div>
+            </div>
+
+            <div class="Reptile">
+            <div class="Animal">
+                <div class="animal_name">
+                    <h3>Komodo Dragon</h3>
+                </div>
+                <div class="animal_image">
+                    <img class="animal_image" src="/static/images/komodo_dragon.jpg" >
+                </div>
+                <div class="description"> 
+                    <p>Large reptile native to Indonesia</p>
+                </div>
+                <form action="/animals" method="post">
+                    <input type="hidden" value="Komodo Dragon" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                    <button class="ui button" type="submit">Learn More</button>
+                </form>
+            </div>
+            </div>
+
+            <div class="Amphibian">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Frog</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/frog.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Vibrant frog native to Central and South America</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Frog" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Mammal">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Amur Tiger</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/tiger.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Big cat native to forests in Russia</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Amur Tiger" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Reptile">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Siamese Crocodile</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/crocodile.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Medium sized Crocodile native to East Asia</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Siamese Crocodile" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Bird">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Peregrine Falcon</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/falcon.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Bird of prey and the fastest animal on the planet.</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Peregrine Falcon" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Mammal">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Barbary Ape</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/monkey.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Ape native to Europe</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Barbary Ape" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Bird">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Magellanic Penguin</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/penguin.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Penguin native to South America</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Penguin" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Reptile">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Aldebra Giant Tortoise</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/tortoise.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Giant Tortoise native to the Seychelles</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Giant Tortoise" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Reptile">
+                <div class="Animal">
+                    <div class="animal_name">
+                        <h3>Burmese Python</h3>
+                    </div>
+                    <div class="animal_image">
+                        <img class="animal_image" src="/static/images/python.jpg" >
+                    </div>
+                    <div class="description"> 
+                        <p>Large non-venomous snake native to Southeast Asia</p>
+                    </div>
+                    <form action="/animals" method="post">
+                        <input type="hidden" value="Burmese Python" name="animal"><!--Sends name to the back end so that it can be used to search the database-->
+                        <button class="ui button" type="submit">Learn More</button>
+                    </form>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+                

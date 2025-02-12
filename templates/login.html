@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="content">
+  <h2 class = "title">Log In</h2>
+  <div class="center">
+      <div class = "logInput">
+          <form action="login" method="post">
+              <div class="ui input">
+                  <input type="text" name="email" placeholder="Email">
+              </div>
+              <br>
+              <br>
+              <div class="ui input">
+                  <input type="password" name = "password" placeholder="Password">
+              </div>
+              <br>
+              <br>
+              <button type = "submit" class="ui button">Submit</button>
+          </form>
+          <br>
+          {% if pass_fail %}
+          <p style="color:red">Incorrect Password</p>
+          {% endif %}
+
+          {% if enter_fail %}
+          <p style="color:red">Please fill in all boxes</p>
+          {% endif %}
+
+          {% if user_fail %}
+          <p style="color:red">Email does not exist</p>
+          {% endif %}
+
+
+
+      </div>
+  </div>
+</div>
+{%endblock%}

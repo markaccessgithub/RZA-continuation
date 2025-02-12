@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <meta name="viewport" content="width=device-width" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+        <link rel="stylesheet" href = "/static/styles.css" />
+        <script src="/static/scripts.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/sidebar.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/sidebar.min.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.js"></script>
+
+
+        <script>
+            function check() {
+                console.log("ah");
+                x = document.getElementById("content");
+                x.style.display = "none";
+
+                y = document.getElementById("check");
+                y.style.display = "inline";
+
+                child = document.getElementById("child_tickets").value;
+                adult = document.getElementById("adult_tickets").value;
+                time = document.getElementById("date").value;
+
+                document.getElementById("child").innerText = (`${child}`);
+                document.getElementById("adult").innerText = (`${adult}`);
+                document.getElementById("time").innerText = (`${time}`);
+            }
+        </script>
+
+    </head>
+
+    <body>
+          <div class="ui sidebar inverted vertical menu right">
+              <a class="item">
+                1
+              </a>
+              <a class="item">
+                2
+              </a>
+              <a class="item">
+                3
+              </a>
+            </div>
+            <div class="pusher">
+                <header>
+                    <a href="/"><img class="logo" src="/static/images/image.jpg" ></a>
+                    <div class="buttons">
+                        <div class="ui selection dropdown" style="z-index: 2;" >
+                            <div class="text">Our Zoo</div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <a href="/login"><div class="item">About</div></a>
+                                <a href="/animals"><div class="item" >Meet The Animals</div></a>
+                            </div>
+                          </div> 
+
+
+                      <button class="ui button">Hotel</button>
+                      <button class="ui button">Education</button>
+                      <button class="ui button">Account</button>
+                    </div>
+                    <div class="padding">
+                      <i class ="big bars icon" onclick="$('.ui.sidebar').sidebar('toggle');"></i>
+                      <div class="spacer">
+                        <i class ="big bars icon"></i>
+                      </div>
+                    </div>
+                </header>
+
+                <!--<div class = "welcome_message">
+
+
+
+                </div> -->
+
+                <div style="display: none;"    id="check">
+                    <h1>Test</h1>
+                    <p>Are you sure?</p>
+                    <label for="child">Child Tickets:</label>
+                    <p name="child" id="child"></p>
+                    <label for="adult">Adult Tickets:</label>
+                    <p name="adult" id="adult"></p>
+                    <label for="time">Date:</label>
+                    <p name="time" id="time"></p>
+                    
+                
+                    <button id="checkout" type = "submit" class="ui button" form="ticket_form" onclick="check()">Continue</button>
+                    <button id="back" class="ui button" onclick="go_back()">Go Back</button>   
+                </div>
+
+                <div class="content" id="content">
+                    <h2 class = "title">Book Tickets</h2>
+                    <div class="center">
+                        <div class = "bookInput">
+                            <form action="book" method="post" id="ticket_form">
+                                <label for="child_tickets">Child Tickets:</label>
+                                <div class="ui input">
+                                    <input type="number" max="99" min="0"  name="child_tickets" id="child_tickets" onchange="price()">
+                                </div>
+                                <script type="text/javascript">
+                                    document.getElementById('child_tickets').value = '0';
+                                </script>
+                                <br>
+                                <br>
+                                <label for="adult_tickets">Adult Tickets:</label>
+                                <div class="ui input">
+                                    <input type="number"  max="99" min="0" name="adult_tickets" id="adult_tickets" onchange="price()" >
+                                </div>
+                                <script type="text/javascript">
+                                    document.getElementById('adult_tickets').value = '0';
+                                </script>
+                                <br>
+                                <br>
+                                <label for="date">Date:</label>
+                                <div class="ui input">
+                                    <input type="date" name="date" id="date" >
+                                </div>
+                                <br>
+                                <br>
+                                <div id="total_price">
+                                    <label for="display">Total Price:</label>
+                                    <p id="display">£0</p>
+                                </div>
+                                <br>
+                            </form>
+
+                            <button id="checkout" class="ui button" onclick="check()">Continue To Checkout</button>
+
+                            <br>
+
+                            {% if invalid_date%}
+                            <p style="color:red">Invalid Date</p>
+                            {% endif %}
+
+                            {% if datefail %}
+                            <p style="color:red">Please choose a date</p>
+                            {% endif %}
+
+                            {% if choosefail %}
+                            <p style="color:red">Please choose a ticket</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</htm
+
+
+return render_template("checkout.html", room_number = number, total = total, check_in = check_in, check_out = check_out)
+
+
+@app.route("/checkout", methods=["GET", "POST"])
+def checkout():
+    if request.method == "POST":
+        total = request.form.get("total")
+        number = request.form.get("number")
+        check_in = request.form.get("check_in")
+        check_out = request.form.get("check_out")
+
+        customer_id = request.cookies.get("user_id")
+
+        con = sqlite3.connect("another.db")
+        cur = con.cursor()
+        res = cur.execute("SELECT reservation_id FROM reservations")
+        list = res.fetchall()
+        print(list)
+
+        print(total)
+        print(number)
+        print(check_in)
+        print(check_out)
+        print(customer_id)
+        #if not list:
+            #res = cur.execute("INSERT INTO reservations VALUES(?,?,?,?,?,?)", (0,check_in,check_out,total,customer_id,number))
+            #con.commit()
+        #else:
+            #last_id = list[-1][0]
+            #print(last_id)
+            #new_id = last_id + 1
+            #res = cur.execute("INSERT INTO reservations VALUES(?,?,?,?,?,?)", (new_id,check_in,check_out,total,customer_id,number))
+            #con.commit()
+    return render_template("checkout.html")
+#def checkout_exit():
+        #total = request.form.get("total")
+        #number = request.form.get("number")
+        #check_in = request.form.get("check_in")
+        #check_out = request.form.get("check_out")
+
+
+        #con = sqlite3.connect("another.db")
+        #cur = con.cursor()
+        #res = cur.execute("INSERT INTO reservations VALUES(?,?,?,?,?,?)", (1,_in,out,"100",0,"101"))
+        #con.commit()
+     #return render_template("checkout.html")
+
+
+
+
+
+
+
+
+
+
+     {%extends 'base.html'%}
+{%block content%}
+<div id = "welcome_message">
+  <h2 class = "title">Change Tickets</h2>
+  <div class = "welcome_center">
+      <div class="please_login">
+          <p>You can only change a ticket if you log in, please log in or sign up here:</p>
+      </div>
+  </div>
+</div>
+
+<div id = "content" class="content">
+  <h2 class = "title">Change Tickets</h2>
+  <div class="center">
+
+      <div class="ticket_container">
+          {%for i in tickets%}
+              {% if i[1] == 'Child'%}<div class="ticket" style="background: #9BC6D3;"> 
+              {% elif i[1] == 'Adult'%}<div class= "ticket" style="background: #82A5C8;">{%endif%}
+                  <form action="change_tickets" method="POST">
+                    <p>Type: {{i[1]}}</p>
+                    <p>Date: {{i[2]}}</p>
+                    <input type="hidden" value = {{i[0]}} id = "tic_id" name="tic_id">
+                    <input type="hidden" value = {{i[2]}} id = "tic_date" name="tic_date">
+                    <button id="submit" type = "submit" class="ui button">Manage Ticket</button>
+                  </form>
+              </div>
+          {%endfor%}
+      </div>
+
+          <br>
+          <p id="error" style="color:red; display:none">Please enter a check out date that is after the check in date.</p>
+          
+          {% if enter_fail%}
+          <p style="color:red">Please fill in the boxes</p>
+          {% endif %}
+
+          {% if today_date%}
+          <p style="color:red">Cannot book dates in the past</p>
+          {% endif %}
+
+          {% if invalid_fail%}
+          <p style="color:red">Please enter a valid reservation that you paid for.</p>
+          {% endif %}
+
+          {% if date_fail %}
+          <p style="color:red">Check out date is before check in</p>
+          {% endif %}
+
+          {% if empty_fail %}
+          <p style="color:red">Please choose both a check in and check out date</p>
+          {% endif %}
+
+          {% if reserve_fail %}
+          <p style="color:red">Hotel not available on those dates</p>
+          {% endif %}
+
+      </div>
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,390 @@
+<div class="animals">
+    <div class="ui two stackable doubling cards">
+        <div class="Mammal">
+            <a class="ui card" href="/examples/theming.html">
+            <div class="image">
+                <img src="/static/images/image.jpg">
+            </div>
+            <div class="content">
+                <div class="header">Theming</div>
+                <div class="description">
+                Examples of many common UI components, useful for testing custom themes.
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="Bird">
+            <a class="ui card" href="/examples/responsive.html">
+            <div class="image">
+                <img src="/static/images/image.jpg">
+            </div>
+            <div class="content">
+                <div class="header">Responsive</div>
+                <div class="description">
+                Patterns for adjusting display for different devices.
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="Amphibian">
+            <a class="ui card" href="/examples/grid.html">
+            <div class="image">
+                <img src="/static/images/image.jpg">
+            </div>
+            <div class="content">
+                <div class="header">Grid</div>
+                <div class="description">
+                An introduction to using Semantic UI grids.
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="Crustacean">
+            <a class="ui card" href="/examples/attached.html">
+            <div class="image">
+                <img src="/static/images/image.jpg">
+            </div>
+            <div class="content">
+                <div class="header">Attached Content</div>
+                <div class="description">
+                Examples of content that can attach to other content.
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="dropdown">
+    <div class="ui simple selection dropdown" style="z-index: 2;" onchange="zoo_select()">
+        <input type="hidden" name="zoo_choice" id="menu_id">
+        <i class="dropdown icon"></i>
+        <div class="default text">Our Zoo</div>
+        <div class="menu">
+        <div class="item" data-value="/login">About</div>
+        <div class="item" data-value="/animals">Meet The Animals</div>
+        </div>
+    </div>
+</div>
+
+
+<select class="ui dropdown" onchange="location = this.value;"> 
+    <option value="/login">About</option> 
+    <option value="/animals">Meet The Animals</option> 
+   </select> 
+
+   <div class="ui selection dropdown" style="z-index: 2;" onchange="animal_class()">
+    <input type="hidden" name="class" id="select_id">
+    <i class="dropdown icon"></i>
+    <div class="default text">Class</div>
+    <div class="menu">
+    <div class="item" data-value="All">All</div>
+    <div class="item" data-value="Mammal">Mammal</div>
+    <div class="item" data-value="Bird">Bird</div>
+    <div class="item" data-value="Amphibian">Amphibian</div>
+    <div class="item" data-value="Crustacean">Crustacean</div>
+    </div>
+</div>
+
+
+
+
+
+<form action="book" method="post" id="ticket_form">
+    <label for="child_tickets">Child Tickets:</label>
+    <div class="ui input">
+        <input type="number" max="99" min="0"  name="child_tickets" id="child_tickets" onchange="price()">
+    </div>
+    <script type="text/javascript">
+        document.getElementById('child_tickets').value = '0';
+    </script>
+    <br>
+    <br>
+    <label for="adult_tickets">Adult Tickets:</label>
+    <div class="ui input">
+        <input type="number"  max="99" min="0" name="adult_tickets" id="adult_tickets" onchange="price()" >
+    </div>
+    <script type="text/javascript">
+        document.getElementById('adult_tickets').value = '0';
+    </script>
+    <br>
+    <br>
+    <label for="date">Date:</label>
+    <div class="ui input">
+        <input type="date" name="date" id="date" >
+    </div>
+    <br>
+    <br>
+    <div id="total_price">
+        <label for="display">Total Price:</label>
+        <p id="display">£0</p>
+    </div>
+    <br>
+</form>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change Hotel</title>
+        <meta name="viewport" content="width=device-width" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><!--JQuery-->
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"/><!--semantic ui css-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script><!--semantic ui js-->
+        <link rel="stylesheet" href = "/static/styles.css" /><!--My CSS-->
+        <script src="/static/scripts.js"></script><!--My js-->
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/sidebar.min.css"/><!--semantic ui css-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/sidebar.min.js"></script><!--semantic ui js-->
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css"/><!--semantic ui css-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.js"></script><!--semantic ui js-->
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css"/><!--semantic ui css-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.js"></script><!--semantic ui js-->
+
+        <script>
+            //this function will parse the specific cookie and return the value
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if(c.indexOf(name) == 0)
+                    return c.substring(name.length,c.length);
+                }
+                return "";
+            }
+            //this function calculates how many nights are between check in and check out and then also works out the price and then
+            //updates the nights and price display to show the user
+            function nights() {
+                document.getElementById("error").style.display = "none";
+                x = document.getElementById("check_in").value;
+                y = document.getElementById("check_out").value;
+
+                console.log(y);
+                console.log(x);
+
+                var check_in = new Date(x);
+                var check_out = new Date(y);
+
+                console.log(check_in);
+                console.log(check_out);
+                if (x && y) {
+                    if (check_in < check_out) {
+                        let time_difference = check_out.getTime() - check_in.getTime();
+                        let days_difference = Math.round(time_difference / (1000 * 3600 * 24));
+                        var nights = days_difference;
+                        var room_price = getCookie('room_price')
+                        console.log(room_price);
+                        var number_price = Number(room_price);
+                        var total = number_price * nights;
+                        document.getElementById("nights").innerText = nights;
+                        document.getElementById("display").innerText = (`£${total}`);
+                        document.cookie = `total=${total}`;
+                    } else if (check_in >= check_out) {
+                        document.getElementById("error").style.display = "inline";
+                    }
+                }
+            }
+            window.onload = function cookies() {
+                console.log(document.cookie);
+                const user_id = getCookie('user_id');
+                const name = getCookie('name');
+                const stoptime = getCookie('end');
+                const number = getCookie('room_number');
+                console.log(user_id);
+                console.log(name);
+                console.log(stoptime)
+                if (user_id) {
+                    document.querySelectorAll('.logout').forEach(function(el) {el.style.display = 'inline';});
+                    document.querySelectorAll('.login').forEach(function(el) {el.style.display = 'none';});
+                    document.querySelectorAll('.sign_up').forEach(function(el) {el.style.display = 'none';});
+
+                    document.getElementById('account').innerHTML = (`Account: ${name}`);
+                    document.getElementById('content').style.display = "inline";
+                    document.getElementById('welcome_message').style.display = "none";
+                } else {
+                    document.querySelectorAll('.logout').forEach(function(el) {el.style.display = 'none';});
+                    document.querySelectorAll('.login').forEach(function(el) {el.style.display = 'inline';});
+                    document.querySelectorAll('.sign_up').forEach(function(el) {el.style.display = 'inline';});
+                    document.getElementById('content').style.display = "none";
+                    document.getElementById('welcome_message').style.display = "flex";
+                }
+                if (stoptime === "TRUE") {
+                    document.getElementById('start').style.display = "none";
+                    document.getElementById('end').style.display = "inline";
+                    document.getElementById('back').style.display = "inline";
+                    document.getElementById('checkout').innerHTML = "Checkout if dates are available";
+                    document.getElementById('room_text').innerText = `Room Found: ${number}`;
+                } else {
+                    document.getElementById('start').style.display = "inline";
+                    document.getElementById('end').style.display = "none";
+                    document.getElementById('back').style.display = "none";
+                    document.getElementById('checkout').innerHTML = "Find Reservation";
+                }
+         
+        }
+
+
+
+        </script>
+
+    </head>
+
+    <body>
+        <div class="ui sidebar inverted vertical menu right"><!--Sidebar that appears on the side for mobile-->
+            <div class="item">
+              Our Zoo 
+              <div class="menu">
+                <a class = "item" href="/about">About</a>
+                <a class = "item" href="/animals">Meet The Animals</a>
+                <a class = "item" href="/book">Book Tickets</a>
+              </div>
+            </div>
+            <div class="item">
+              Hotel
+              <div class="menu">
+                <a class = "item" href="/hotel_search">Search</a>
+              </div>
+            </div>
+            <div class="item">
+              Education
+              <div class="menu">
+                <a class = "item" href="/education">About</a>
+                <a class = "item" href="/edu_visit">Book Visit</a>
+              </div>
+            </div>
+            <div class="item">
+              Account
+              <div class="menu">
+                <a class = "item log_out" href="/manage">Change Password</a>
+                <a class = "item" href="/delete">Delete Account</a>
+                <a class = "item" href="/change_hotel">Manage Reservations</a>
+                <a class = "item sign_up" id = "sign_up" href="/signup">Sign Up</a>
+                <a class = "item login" id = "login" href="/login">Log In</a>
+                <a href="/logout" class="item logout" id="logout">Log Out</a>
+              </div>
+            </div>
+        </div>
+            <div class="pusher">
+              <header>
+                <a href="/"><img class="logo" src="/static/images/logo.png" ></a>
+                <div class="buttons">
+                  <div class="ui selection dropdown" style="z-index: 2; min-width: 10em;" >
+                    <div class="text">Our Zoo</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="/login"><div class="item">About</div></a>
+                        <a href="/animals"><div class="item" >Meet The Animals</div></a>
+                        <a href="/book"><div class="item" >Book Tickets</div></a>
+                    </div>
+                  </div> 
+
+
+                  <div class="ui selection dropdown" style="z-index: 2; min-width: 2em;" >
+                    <div class="text">Hotel</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="/hotel_search"><div class="item">Search</div></a>
+                    </div>
+                  </div> 
+
+                  <div class="ui selection dropdown" style="z-index: 2; min-width: 2em;" >
+                    <div class="text">Education</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="/education"><div class="item">About</div></a>
+                        <a href="/edu_visit"><div class="item">Book Visit</div></a>
+                    </div>
+                  </div> 
+                  
+                  <div class="ui selection dropdown" style="z-index: 2; min-width: 6em;" >
+                    <div id ="account" class="text">Account</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a id = "logout" class="logout" href="/manage"><div class="item" >Change Password</div></a>
+                        <a href="/delete"><div class="item">Delete Account</div></a>
+                        <a href="/change_hotel"><div class="item" >Manage Hotels</div></a>
+                        <a id = "sign_up" class="sign_up" href="/signup"><div class="item" >Sign Up</div></a>
+                        <a id = "login" class="login" href="/login"><div class="item" >Log In</div></a>
+                        <a id = "logout" class="logout" href="/logout"><div class="item" >Log Out</div></a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="padding">
+                  <i class ="big bars icon" onclick="$('.ui.sidebar').sidebar('toggle');"></i><!--Toggles Sidebar-->
+                  <div class="spacer">
+                    <i class ="big bars icon"></i>
+                  </div>
+                </div>
+            </header>
+
+                <div id = "welcome_message">
+                    <h2 class = "title">Change Tickets</h2>
+                    <div class = "welcome_center">
+                        <div class="please_login">
+                            <p>You can only change a ticket if you log in, please log in or sign up here:</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id = "content" class="content">
+                    <h2 class = "title">Change Hotel</h2>
+                    <div class="center">
+
+                        <div class="ticket_container">
+                            {%for i in tickets%}
+                                {% if i[1] == 'Child'%}<div class="ticket" style="background: #9BC6D3;"> 
+                                {% elif i[1] == 'Adult'%}<div class= "ticket" style="background: #82A5C8;">{%endif%}
+                                    <form action="change_tickets" method="POST">
+                                      <p>Type: {{i[1]}}</p>
+                                      <p>Date: {{i[2]}}</p>
+                                      <input type="hidden" value = {{i[0]}} id = "tic_id" name="tic_id">
+                                      <input type="hidden" value = {{i[2]}} id = "tic_date" name="tic_date">
+                                      <button id="submit" type = "submit" class="ui button">Manage Ticket</button>
+                                    </form>
+                                </div>
+                            {%endfor%}
+                        </div>
+
+                            <br>
+                            <p id="error" style="color:red; display:none">Please enter a check out date that is after the check in date.</p>
+                            
+                            {% if enter_fail%}
+                            <p style="color:red">Please fill in the boxes</p>
+                            {% endif %}
+
+                            {% if today_date%}
+                            <p style="color:red">Cannot book dates in the past</p>
+                            {% endif %}
+
+                            {% if invalid_fail%}
+                            <p style="color:red">Please enter a valid reservation that you paid for.</p>
+                            {% endif %}
+
+                            {% if date_fail %}
+                            <p style="color:red">Check out date is before check in</p>
+                            {% endif %}
+
+                            {% if empty_fail %}
+                            <p style="color:red">Please choose both a check in and check out date</p>
+                            {% endif %}
+
+                            {% if reserve_fail %}
+                            <p style="color:red">Hotel not available on those dates</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

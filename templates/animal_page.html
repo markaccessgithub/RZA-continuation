@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="content">
+  <h1>{{ name }}</h1><!--Inserts the animal data-->
+
+  <p>{{ latin }}</p>
+
+
+  <img src="{{picture}}" style="width: 60%; height: 40%;" alt="animal image">
+
+  <p>{{ description }}</p>
+  <br>
+  <br>
+
+  <p>{{ iucn }}</p>
+
+  <img src="static/images/iucn.jpg" style="width: 70%; height: 40vh;" alt="animal image">
+
+
+</div>
+{%endblock%}

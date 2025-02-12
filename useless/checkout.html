@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <meta name="viewport" content="width=device-width" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+        <link rel="stylesheet" href = "/static/styles.css" />
+        <script src="/static/scripts.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/sidebar.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/sidebar.min.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.js"></script>
+        <link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/dropdown.min.js"></script>
+
+        <script>
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if(c.indexOf(name) == 0)
+                    return c.substring(name.length,c.length);
+                }
+                return "";
+        }
+            window.onload = function cookies() {
+                console.log(document.cookie);
+                const user_id = getCookie('user_id');
+                const name = getCookie('name');
+                console.log("just testing");
+                console.log(user_id);
+                console.log(name);
+                
+                if (user_id) {
+                    document.getElementById('logout').style.display = "inline";
+                    document.getElementById('login').style.display = "none";
+                    document.getElementById('sign_up').style.display = "none";
+                    document.getElementById('account').innerHTML = (`Account: ${name}`);
+                    document.getElementById('confirm').style.display = "inline";
+                    document.getElementById('welcome_message').style.display = "none";
+                    
+                    var total = document.getElementById("total_hidden").innerText;
+                    var room_number= document.getElementById("room_number_hidden").innerText;
+                    var check_in = document.getElementById("check_in_hidden").innerText;
+                    var check_out= document.getElementById("check_out_hidden").innerText;
+                    document.getElementById("room_price").value = room_price;
+                    document.getElementById("room").value = room_number;
+                    document.getElementById("check_in").value = check_in;
+                    document.getElementById("check_out").value = check_out;
+
+                } else {
+                    document.getElementById('logout').style.display = "none";
+                    document.getElementById('login').style.display = "inline";
+                    document.getElementById('sign_up').style.display = "inline";
+                    document.getElementById('confirm').style.display = "none";
+                    document.getElementById('welcome_message').style.display = "flex";
+            }
+        }
+
+
+
+        </script>
+
+    </head>
+
+    <body>
+          <div class="ui sidebar inverted vertical menu right">
+              <a class="item">
+                1
+              </a>
+              <a class="item">
+                2
+              </a>
+              <a class="item">
+                3
+              </a>
+            </div>
+            <div class="pusher">
+                <header>
+                    <a href="/"><img class="logo" src="/static/images/image.jpg" ></a>
+                    <div class="buttons">
+                      <div class="ui selection dropdown" style="z-index: 2;" >
+                        <div class="text">Our Zoo</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="/login"><div class="item">About</div></a>
+                            <a href="/animals"><div class="item" >Meet The Animals</div></a>
+                            <a href="/book"><div class="item" >Book Tickets</div></a>
+                        </div>
+                      </div> 
+
+
+                      <div class="ui selection dropdown" style="z-index: 2;" >
+                        <div class="text">Hotel</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="/hotel_search"><div class="item">Search</div></a>
+                        </div>
+                      </div> 
+
+                      <div class="ui selection dropdown" style="z-index: 2;" >
+                        <div class="text">Education</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="/"><div class="item">About</div></a>
+                            <a href="/"><div class="item">Book Visit</div></a>
+                        </div>
+                      </div> 
+                      
+                      <div class="ui selection dropdown" style="z-index: 2;" >
+                        <div id ="account" class="text">Account</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="/"><div class="item">Manage Tickets</div></a>
+                            <a href="/animals"><div class="item" >Manage Hotels</div></a>
+                            <a id = "sign_up" href="/login"><div class="item" >Sign Up</div></a>
+                            <a id = "login" href="/login"><div class="item" >Log In</div></a>
+                            <a id = "logout" href="/logout"><div class="item" >Log Out</div></a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="padding">
+                      <i class ="big bars icon" onclick="$('.ui.sidebar').sidebar('toggle');"></i>
+                      <div class="spacer">
+                        <i class ="big bars icon"></i>
+                      </div>
+                    </div>
+                </header>
+
+                <div id = "welcome_message">
+                    <h2 class = "title">Book Hotel</h2>
+                    <div class = "welcome_center">
+                        <div class="please_login">
+                            <p>You can only book a hotel if you log in, please log in or sign up here:</p>
+
+                            <div class="sign_up_buttons">
+                                <a href="/login"><button class="ui button">Log In</button></a>
+                                <a href="/"><button class="ui button" >Sign Up</button></a>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id = "confirm">
+                  <h2 class = "title">Confirmation</h2>
+                  <div>
+                      <div>
+                          <p id="total_hidden">{{total}}</p>
+                          <p id="room_number_hidden">{{room_number}}</p>
+                          <p id="check_in_hidden">{{check_in}}</p>
+                          <p id="check_out_hidden">{{check_out}}</p>
+                          <p>Hotel is available, do you with to book a room with these dates?:</p>
+
+                          <div class="book_buttons">
+                            <form action="/checkout" method="post" id="checkout_form">
+
+          
+                              <input type = "hidden" id="total" name="total" >
+                              <input type = "hidden" name="number" id="number" >
+                              <input type = "hidden" name="check_in" id="check_in" >
+                              <input type = "hidden" name="check_out" id="check_out">
+
+                              <button id="checkout" type = "submit" class="ui button">Continue</button>
+                    
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+            </div>
+    </body>
+</html>
